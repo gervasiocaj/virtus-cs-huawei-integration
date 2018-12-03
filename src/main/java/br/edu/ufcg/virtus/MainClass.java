@@ -1,44 +1,37 @@
 package br.edu.ufcg.virtus;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.methods.RequestBuilder;
-import org.apache.http.impl.client.HttpClientBuilder;
+import br.edu.ufcg.virtus.beans.LoginBean;
+import br.edu.ufcg.virtus.beans.SiteBean;
+import br.edu.ufcg.virtus.lists.SiteList;
+import br.edu.ufcg.virtus.service.impl.LoginServiceImpl;
+import br.edu.ufcg.virtus.service.impl.SiteServiceImpl;
+import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Initial class
  * @author jotajr
  *
  */
-public class MainClass
-{
+public class MainClass {
+
+    private static final Logger logger = LoggerFactory.getLogger(MainClass.class);
+
     public static void main( String[] args )
     {
-        System.out.println( "Initial test" );
-        String url = "http://10.75.228.108:7070/service/session";
-        HttpClient client = HttpClientBuilder.create().build();
-        try {
-            HttpUriRequest request = RequestBuilder.post()
-                    .setUri(url)
-                    .setHeader("X-Auth-User", "admin")
-                    .setHeader("X-Auth-Key", "")
-                    .setHeader("X-Custom-Header", "custom header http request")
-                    .setHeader("X-Auth-UserType", "0")
-                    .setHeader("Accept-Language", "en_US")
-                    .build();
+        LoginServiceImpl loginService = new LoginServiceImpl();
+        LoginBean loginBean = loginService.doLogin("http://10.75.228.108",
+                7070, "admin", "649b1c8cacbd9cb8b12845d5e887a9c35a9d492d1e087d9d3a3c383f70d1997d", 0);
 
-            HttpResponse response = client.execute(request);
-            System.out.println(response.getStatusLine().getStatusCode());
+        System.out.println(loginBean);
 
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SiteServiceImpl siteService = new SiteServiceImpl();
+
+        siteService.getSiteList(loginBean.getToken(), "http://10.75.228.108",
+                7070);
 
     }
 }
