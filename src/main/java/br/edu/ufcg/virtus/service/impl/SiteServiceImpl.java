@@ -40,13 +40,11 @@ public class SiteServiceImpl implements SiteService {
             LOGGER.error("Fail to get the list of sites. Error: {}", e.getLocalizedMessage());
         }
 
-
         return list;
 
     }
 
     public HostList getHostList(String authToken, String url, int port, SiteBean site) {
-
 
         HostList list = new HostList();
 

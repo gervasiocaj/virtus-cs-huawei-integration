@@ -4,6 +4,7 @@ import br.edu.ufcg.virtus.beans.LoginBean;
 import br.edu.ufcg.virtus.beans.UserBean;
 import br.edu.ufcg.virtus.service.LoginService;
 import com.google.gson.Gson;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -26,6 +27,8 @@ public class LoginServiceImpl implements LoginService {
         LoginBean loginBean = new LoginBean();
         loginBean.setLogin(login);
 
+        String codedPassword = DigestUtils.sha256Hex(password);
+
         String connectionUrl = url;
 
         if(port != 80) {
@@ -42,7 +45,7 @@ public class LoginServiceImpl implements LoginService {
             HttpUriRequest request = RequestBuilder.post()
                     .setUri(connectionUrl)
                     .setHeader("X-Auth-User", login)
-                    .setHeader("X-Auth-Key", password)
+                    .setHeader("X-Auth-Key", codedPassword)
                     .setHeader("X-Custom-Header", "custom header http request")
                     .setHeader("X-Auth-UserType", String.valueOf(userType))
                     .setHeader("Accept-Language", "en_US")

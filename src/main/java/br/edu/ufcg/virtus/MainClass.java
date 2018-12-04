@@ -17,10 +17,10 @@ public class MainClass {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainClass.class);
 
-    private static final String URL = "http://10.75.228.108";
+    private static final String URL = "http://10.75.228.200";
     private static final int PORT = 7070;
     private static final String LOGIN = "admin";
-    private static final String PASSWORD = "649b1c8cacbd9cb8b12845d5e887a9c35a9d492d1e087d9d3a3c383f70d1997d";
+    private static final String PASSWORD = "Fscloud@2018";
     private static final int USER_TYPE = 0;
 
     public static void main( String[] args )
@@ -39,7 +39,7 @@ public class MainClass {
         LOGGER.debug("SITE LIST RECOVERED");
         LOGGER.debug(siteList.toString());
 
-
+        System.out.println();
 
         if(!siteList.getSites().isEmpty()) {
             HostList hostList = siteService.getHostList(loginBean.getToken(), URL, PORT, siteList.getSites().get(0));
