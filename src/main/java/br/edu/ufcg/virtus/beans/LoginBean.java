@@ -2,15 +2,16 @@ package br.edu.ufcg.virtus.beans;
 
 public class LoginBean {
 
-    private String user;
+    private String login;
     private String token;
+    private UserBean user;
 
-    public String getUser() {
-        return user;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getToken() {
@@ -21,11 +22,20 @@ public class LoginBean {
         this.token = token;
     }
 
+    public UserBean getUser() {
+        return user;
+    }
+
+    public void setUser(UserBean user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "LoginBean{" +
-                "user='" + user + '\'' +
+                "login='" + login + '\'' +
                 ", token='" + token + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

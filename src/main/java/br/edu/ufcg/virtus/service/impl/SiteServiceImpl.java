@@ -1,14 +1,13 @@
 package br.edu.ufcg.virtus.service.impl;
 
+import br.edu.ufcg.virtus.beans.SiteBean;
+import br.edu.ufcg.virtus.lists.HostList;
 import br.edu.ufcg.virtus.lists.SiteList;
 import br.edu.ufcg.virtus.service.SiteService;
+import br.edu.ufcg.virtus.util.IntegrationUtil;
 import com.google.gson.Gson;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,40 +23,52 @@ public class SiteServiceImpl implements SiteService {
 
         String connectionUrl = url;
 
-        if(port != 80) {
+        if (port != 80) {
             connectionUrl += ":" + port;
         }
 
         connectionUrl += "/service/sites";
 
-        HttpClient client = HttpClientBuilder.create().build();
+        LOGGER.debug("Searching for a list of sites in {}", connectionUrl);
 
-        LOGGER.debug( "Searching for a list of sites in {}", connectionUrl);
-
-        HttpUriRequest request = RequestBuilder.get()
-                .setUri(connectionUrl)
-                .setHeader("x-auth-token", authToken)
-                .build();
-
-        HttpResponse response = null;
         try {
-            response = client.execute(request);
-            if(response.getStatusLine().getStatusCode() == 200) {
-                LOGGER.debug("Site list request was sucessfully");
-            }
-
-            String body = EntityUtils.toString(response.getEntity());
-
             Gson gson = new Gson();
-
-            list = gson.fromJson(body, SiteList.class);
+            list = gson.fromJson(IntegrationUtil.getRequestForJsonWithToken(authToken, connectionUrl),
+                    SiteList.class);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Fail to get the list of sites. Error: {}", e.getLocalizedMessage());
         }
+
 
         return list;
 
+    }
+
+    public HostList getHostList(String authToken, String url, int port, SiteBean site) {
+
+
+        HostList list = new HostList();
+
+        String connectionUrl = url;
+
+        if (port != 80) {
+            connectionUrl += ":" + port;
+        }
+
+        connectionUrl += site.getUri() + "/hosts";
+
+        LOGGER.debug("Searching for a list of host of site {} in {}", site.getName(), connectionUrl);
+
+        Gson gson = new Gson();
+
+        try {
+            list = gson.fromJson(IntegrationUtil.getRequestForJsonWithToken(authToken, connectionUrl), HostList.class);
+        } catch (IOException e) {
+            LOGGER.error("Fail to get the list of hosts. Error: {}", e.getLocalizedMessage());
+        }
+
+        return list;
     }
 
 }

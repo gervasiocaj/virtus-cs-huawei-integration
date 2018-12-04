@@ -1,7 +1,9 @@
 package br.edu.ufcg.virtus.service.impl;
 
 import br.edu.ufcg.virtus.beans.LoginBean;
+import br.edu.ufcg.virtus.beans.UserBean;
 import br.edu.ufcg.virtus.service.LoginService;
+import com.google.gson.Gson;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -9,6 +11,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +24,7 @@ public class LoginServiceImpl implements LoginService {
     public LoginBean doLogin(String url, int port, String login, String password, int userType) {
 
         LoginBean loginBean = new LoginBean();
-        loginBean.setUser(login);
+        loginBean.setLogin(login);
 
         String connectionUrl = url;
 
@@ -58,6 +61,11 @@ public class LoginServiceImpl implements LoginService {
                 }
             }
 
+            Gson gson = new Gson();
+
+            UserBean userBean = gson.fromJson(EntityUtils.toString(response.getEntity()), UserBean.class);
+
+            loginBean.setUser(userBean);
 
         } catch (ClientProtocolException e) {
             LOGGER.error("Error on client protocol: {}", e.getLocalizedMessage());
