@@ -10,22 +10,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.URI;
 
 public class SiteServiceImpl implements SiteService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SiteServiceImpl.class);
 
-    public SiteList getSiteList(String authToken, String url, int port) {
+    public SiteList getSiteList(URI uri, String authToken) {
 
         SiteList list = new SiteList();
 
-        String connectionUrl = url;
-
-        if (port != 80) {
-            connectionUrl += ":" + port;
-        }
-
-        connectionUrl += "/service/sites";
+        String connectionUrl = IntegrationUtil.buildUrl(uri, "/service/sites");
 
         LOGGER.debug("Searching for a list of sites in {}", connectionUrl);
 
@@ -42,17 +37,11 @@ public class SiteServiceImpl implements SiteService {
 
     }
 
-    public HostList getHostList(String authToken, String url, int port, SiteBean site) {
+    public HostList getHostList(URI uri, String authToken, SiteBean site) {
 
         HostList list = new HostList();
 
-        String connectionUrl = url;
-
-        if (port != 80) {
-            connectionUrl += ":" + port;
-        }
-
-        connectionUrl += site.getUri() + "/hosts";
+        String connectionUrl = IntegrationUtil.buildUrl(uri, "/hosts");
 
         LOGGER.debug("Searching for a list of host of site {} in {}", site.getName(), connectionUrl);
 
