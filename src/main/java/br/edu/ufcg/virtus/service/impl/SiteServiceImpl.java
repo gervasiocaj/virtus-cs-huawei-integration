@@ -6,8 +6,6 @@ import br.edu.ufcg.virtus.lists.SiteList;
 import br.edu.ufcg.virtus.service.SiteService;
 import br.edu.ufcg.virtus.util.IntegrationUtil;
 import com.google.gson.Gson;
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
