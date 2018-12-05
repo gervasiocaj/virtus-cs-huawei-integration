@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.URI;
 
 public class IntegrationUtil {
 
@@ -33,6 +34,13 @@ public class IntegrationUtil {
         }
 
         return EntityUtils.toString(response.getEntity());
+    }
+
+    public static String buildUrl(URI uri, String endpoint) {
+        int port = uri.getPort();
+        if (port == -1) port = 80;
+
+        return uri.getScheme() + "://" + uri.getHost() + ":" + port + endpoint;
     }
 
 }

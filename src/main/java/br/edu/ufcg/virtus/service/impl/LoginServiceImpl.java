@@ -3,6 +3,7 @@ package br.edu.ufcg.virtus.service.impl;
 import br.edu.ufcg.virtus.beans.LoginBean;
 import br.edu.ufcg.virtus.beans.UserBean;
 import br.edu.ufcg.virtus.service.LoginService;
+import br.edu.ufcg.virtus.util.IntegrationUtil;
 import com.google.gson.Gson;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.Header;
@@ -17,25 +18,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.URI;
 
 public class LoginServiceImpl implements LoginService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginServiceImpl.class);
 
-    public LoginBean doLogin(String url, int port, String login, String password, int userType) {
+    public LoginBean doLogin(URI uri, String login, String password, int userType) {
 
         LoginBean loginBean = new LoginBean();
         loginBean.setLogin(login);
 
         String codedPassword = DigestUtils.sha256Hex(password);
 
-        String connectionUrl = url;
-
-        if(port != 80) {
-            connectionUrl += ":" + port;
-        }
-
-        connectionUrl += "/service/session";
+        String connectionUrl = IntegrationUtil.buildUrl(uri, "/service/session");
 
         HttpClient client = HttpClientBuilder.create().build();
 
