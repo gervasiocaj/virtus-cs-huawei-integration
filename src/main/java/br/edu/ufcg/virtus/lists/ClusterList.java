@@ -1,21 +1,21 @@
 package br.edu.ufcg.virtus.lists;
 
-import br.edu.ufcg.virtus.beans.SiteBean;
+import br.edu.ufcg.virtus.beans.ClusterBean;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.List;
 
-public class SiteList {
+public class ClusterList {
 
-    private List<SiteBean> sites;
+    private List<ClusterBean> clusters;
 
-    public List<SiteBean> getSites() {
-        return sites;
+    public List<ClusterBean> getClusters() {
+        return clusters;
     }
 
-    public void setSites(List<SiteBean> sites) {
-        this.sites = sites;
+    public void setClusters(List<ClusterBean> clusters) {
+        this.clusters = clusters;
     }
 
     @Override

@@ -1,5 +1,8 @@
 package br.edu.ufcg.virtus.beans;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import java.util.List;
 
 public class UserBean {
@@ -52,12 +55,6 @@ public class UserBean {
 
     @Override
     public String toString() {
-        return "UserBean{" +
-                "validity=" + validity +
-                ", userName='" + userName + '\'' +
-                ", roleList=" + roleList +
-                ", userId='" + userId + '\'' +
-                ", privilegeIds=" + privilegeIds +
-                '}';
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
     }
 }

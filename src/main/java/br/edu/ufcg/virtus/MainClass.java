@@ -1,8 +1,12 @@
 package br.edu.ufcg.virtus;
 
+import br.edu.ufcg.virtus.beans.HostStatisticsBean;
 import br.edu.ufcg.virtus.beans.LoginBean;
+import br.edu.ufcg.virtus.beans.SiteBean;
+import br.edu.ufcg.virtus.lists.ClusterList;
 import br.edu.ufcg.virtus.lists.HostList;
 import br.edu.ufcg.virtus.lists.SiteList;
+import br.edu.ufcg.virtus.lists.VmList;
 import br.edu.ufcg.virtus.service.impl.LoginServiceImpl;
 import br.edu.ufcg.virtus.service.impl.SiteServiceImpl;
 import org.slf4j.Logger;
@@ -43,9 +47,24 @@ public class MainClass {
         System.out.println();
 
         if (!siteList.getSites().isEmpty()) {
-            HostList hostList = siteService.getHostList(_URI, loginBean.getToken(), siteList.getSites().get(0));
-            LOGGER.debug("HOST LIST RECOVERED FOR SITE {}", siteList.getSites().get(0).getName());
+
+            SiteBean siteTest = siteList.getSites().get(0);
+
+            HostList hostList = siteService.getHostList(_URI, loginBean.getToken(), siteTest);
+            LOGGER.debug("HOST LIST RECOVERED FOR SITE {}", siteTest.getName());
             LOGGER.debug(hostList.toString());
+
+            VmList vmList = siteService.getVmsLis(_URI, loginBean.getToken(), siteTest);
+            LOGGER.debug("VMS LIST RECOVERED FOR SITE {}", siteTest.getName());
+            LOGGER.debug(vmList.toString());
+
+            ClusterList clusterList = siteService.getClustersList(_URI, loginBean.getToken(), siteTest);
+            LOGGER.debug("CLUSTER LIST RECOVERED FOR SITE {}", siteTest.getName());
+            LOGGER.debug(clusterList.toString());
+
+            HostStatisticsBean hostStatisticsBean = siteService.getSiteHostsStatistics(_URI, loginBean.getToken(), siteTest);
+            LOGGER.debug("HOST STATISTICS RECOVERED FOR SITE {}", siteTest.getName());
+            LOGGER.debug(hostStatisticsBean.toString());
         }
     }
 }

@@ -1,6 +1,8 @@
 package br.edu.ufcg.virtus.lists;
 
 import br.edu.ufcg.virtus.beans.HostBean;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.List;
 
@@ -27,9 +29,6 @@ public class HostList {
 
     @Override
     public String toString() {
-        return "HostList{" +
-                "total=" + total +
-                ", hosts=" + hosts +
-                '}';
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
     }
 }

@@ -1,6 +1,8 @@
 package br.edu.ufcg.virtus.lists;
 
 import br.edu.ufcg.virtus.beans.VmBean;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.List;
 
@@ -27,9 +29,6 @@ public class VmList {
 
     @Override
     public String toString() {
-        return "VmList{" +
-                "total=" + total +
-                ", vms=" + vms +
-                '}';
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
     }
 }

@@ -1,5 +1,8 @@
 package br.edu.ufcg.virtus.beans;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class VmBean {
 
     private String description;
@@ -149,23 +152,6 @@ public class VmBean {
 
     @Override
     public String toString() {
-        return "VmBean{" +
-                "description='" + description + '\'' +
-                ", location='" + location + '\'' +
-                ", group='" + group + '\'' +
-                ", uri='" + uri + '\'' +
-                ", hostUrn='" + hostUrn + '\'' +
-                ", status='" + status + '\'' +
-                ", cdRomStatus='" + cdRomStatus + '\'' +
-                ", isLinkClone=" + isLinkClone +
-                ", isTemplate=" + isTemplate +
-                ", locationName='" + locationName + '\'' +
-                ", pvDriverStatus='" + pvDriverStatus + '\'' +
-                ", tollInstallStatus='" + tollInstallStatus + '\'' +
-                ", clusterUrn='" + clusterUrn + '\'' +
-                ", urn='" + urn + '\'' +
-                ", createTime='" + createTime + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
     }
 }

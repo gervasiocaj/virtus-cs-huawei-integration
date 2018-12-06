@@ -1,5 +1,8 @@
 package br.edu.ufcg.virtus.beans;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class LoginBean {
 
     private String login;
@@ -32,10 +35,6 @@ public class LoginBean {
 
     @Override
     public String toString() {
-        return "LoginBean{" +
-                "login='" + login + '\'' +
-                ", token='" + token + '\'' +
-                ", user=" + user +
-                '}';
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
     }
 }

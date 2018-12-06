@@ -1,5 +1,8 @@
 package br.edu.ufcg.virtus.beans;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class HostBean {
 
     private String description;
@@ -176,26 +179,6 @@ public class HostBean {
 
     @Override
     public String toString() {
-        return "HostBean{" +
-                "description='" + description + '\'' +
-                ", clusterName='" + clusterName + '\'' +
-                ", uri='" + uri + '\'' +
-                ", ip='" + ip + '\'' +
-                ", status='" + status + '\'' +
-                ", bmcIp='" + bmcIp + '\'' +
-                ", bmcUserName='" + bmcUserName + '\'' +
-                ", clusterUrn='" + clusterUrn + '\'' +
-                ", computeResourceStatics='" + computeResourceStatics + '\'' +
-                ", cpuMHz='" + cpuMHz + '\'' +
-                ", cpuQuantity=" + cpuQuantity +
-                ", hostMultiPathMode='" + hostMultiPathMode + '\'' +
-                ", isMaintaining=" + isMaintaining +
-                ", memQuantityMB=" + memQuantityMB +
-                ", multiPathMode='" + multiPathMode + '\'' +
-                ", nicQuantity=" + nicQuantity +
-                ", urn='" + urn + '\'' +
-                ", attachedISOVM='" + attachedISOVM + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
     }
 }

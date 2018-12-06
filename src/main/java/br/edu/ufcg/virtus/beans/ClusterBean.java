@@ -1,25 +1,26 @@
 package br.edu.ufcg.virtus.beans;
 
+
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class SiteBean {
+/**
+ * "clusters": [
+ *         {
+ *             "description": null,
+ *             "uri": "/service/sites/4413070B/clusters/106",
+ *             "urn": "urn:sites:4413070B:clusters:106",
+ *             "name": "MigEvals"
+ *         }
+ *     ]
+ */
 
-    private String timeZone;
-    private String description;
-    private String uri;
-    private int ntpCycle;
-    private String urn;
-    private String ntpIp;
-    private String name;
+public class ClusterBean {
 
-    public String getTimeZone() {
-        return timeZone;
-    }
-
-    public void setTimeZone(String timeZone) {
-        this.timeZone = timeZone;
-    }
+    public String description;
+    public String uri;
+    public String urn;
+    public String name;
 
     public String getDescription() {
         return description;
@@ -37,28 +38,12 @@ public class SiteBean {
         this.uri = uri;
     }
 
-    public int getNtpCycle() {
-        return ntpCycle;
-    }
-
-    public void setNtpCycle(int ntpCycle) {
-        this.ntpCycle = ntpCycle;
-    }
-
     public String getUrn() {
         return urn;
     }
 
     public void setUrn(String urn) {
         this.urn = urn;
-    }
-
-    public String getNtpIp() {
-        return ntpIp;
-    }
-
-    public void setNtpIp(String ntpIp) {
-        this.ntpIp = ntpIp;
     }
 
     public String getName() {
