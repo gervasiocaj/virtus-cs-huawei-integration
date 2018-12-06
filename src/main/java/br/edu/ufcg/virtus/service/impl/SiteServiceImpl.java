@@ -41,7 +41,7 @@ public class SiteServiceImpl implements SiteService {
 
         HostList list = new HostList();
 
-        String connectionUrl = IntegrationUtil.buildUrl(uri, "/hosts");
+        String connectionUrl = IntegrationUtil.buildUrl(uri, site.getUri() + "/hosts");
 
         LOGGER.debug("Searching for a list of host of site {} in {}", site.getName(), connectionUrl);
 
