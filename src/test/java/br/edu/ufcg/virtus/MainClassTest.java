@@ -40,7 +40,6 @@ public class MainClassTest
         LoginBean loginBean = loginService.doLogin(_URI, LOGIN, PASSWORD, USER_TYPE);
         assertEquals(LOGIN, loginBean.getLogin());
         assertEquals(LOGIN, loginBean.getUser().getUserName());
-        assertEquals(600000, loginBean.getUser().getValidity());
     }
 
     @Test
